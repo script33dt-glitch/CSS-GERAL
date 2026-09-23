@@ -1,0 +1,103 @@
+/* =========================================================
+   YOUTUBE WEB - TEMA ROXO, ESCRITA VERMELHA & COPO CLICÁVEL
+   ========================================================= */
+
+/* 1. FUNDO ROXO ESCURO EM TODA A PÁGINA */
+html, 
+body, 
+ytd-app, 
+#page-manager, 
+#columns, 
+#primary, 
+#secondary, 
+ytd-watch-flexy,
+ytd-browse, 
+#content,
+ytd-mini-guide-renderer,
+ytd-guide-renderer {
+  background-color: #05020a !important;
+  background-image: radial-gradient(circle at 50% 50%, rgba(45, 10, 65, 0.8), #05020a 90%) !important;
+  background-attachment: fixed !important;
+}
+
+/* 2. BARRA SUPERIOR (HEADER) E MENU LATERAL */
+#masthead-container, 
+ytd-masthead, 
+#guide-content,
+ytd-mini-guide-entry-renderer {
+  background-color: rgba(12, 3, 20, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 0, 51, 0.3) !important;
+}
+
+/* 3. SUBSTITUIÇÃO DO LOGO PELO COPO FUNCIONAL (CLICÁVEL) */
+/* Esconde o desenho/texto do SVG nativo do YouTube */
+ytd-topbar-logo-renderer #logo ytd-logo,
+ytd-topbar-logo-renderer #logo svg,
+#country-code {
+  display: none !important;
+}
+
+/* Aplica o copo diretamente sobre o elemento <a> do logo oficial */
+ytd-topbar-logo-renderer a#logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 45px !important;
+  height: 45px !important;
+  margin-left: 10px !important;
+  cursor: pointer !important;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><g><path d="M 10 15 C 10 10, 90 10, 90 15 L 82 105 C 80 115, 20 115, 18 105 Z" fill="%23FFFFFF" stroke="%23DDDDDD" stroke-width="2"/><path d="M 12 18 C 12 13, 88 13, 88 18 L 86 35 C 86 35, 14 35, 14 35 Z" fill="%23E6E6E6"/><ellipse cx="50" cy="18" rx="36" ry="6" fill="%23A800FF"/><path d="M 16 33 L 84 33" stroke="%23B0B0B0" stroke-width="3"/><path d="M 20 48 L 80 48" stroke="%23D0D0D0" stroke-width="2"/></g></svg>') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  filter: drop-shadow(0 0 8px #a800ff) drop-shadow(0 0 4px #ff0033) !important;
+  transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+
+/* Efeito ao passar o mouse por cima do copo */
+ytd-topbar-logo-renderer a#logo:hover {
+  transform: scale(1.1) !important;
+  filter: drop-shadow(0 0 12px #a800ff) drop-shadow(0 0 8px #ff0033) !important;
+}
+
+/* 4. ESCRITA EM VERMELHO NEON PARA TÍTULOS E TEXTOS */
+#video-title,
+yt-formatted-string,
+span,
+p,
+a,
+h1,
+h2,
+h3,
+#channel-name,
+#description-text,
+.title {
+  color: #ff0033 !important;
+  text-shadow: 0 0 5px rgba(255, 0, 51, 0.7) !important;
+}
+
+/* 5. BARRA DE PESQUISA */
+ytd-searchbox #container {
+  background-color: rgba(20, 5, 30, 0.9) !important;
+  border: 1px solid #ff0033 !important;
+  box-shadow: 0 0 8px rgba(255, 0, 51, 0.4) !important;
+  border-radius: 20px 0 0 20px !important;
+}
+
+ytd-searchbox #search-icon-legacy {
+  background-color: rgba(35, 8, 50, 0.9) !important;
+  border: 1px solid #ff0033 !important;
+  border-radius: 0 20px 20px 0 !important;
+}
+
+/* 6. CARDS DE VÍDEOS E BOTÕES */
+ytd-rich-item-renderer, 
+ytd-compact-video-renderer {
+  background: transparent !important;
+}
+
+yt-button-shape button,
+ytd-button-renderer a {
+  background-color: rgba(40, 10, 60, 0.8) !important;
+  border: 1px solid #a800ff !important;
+}
