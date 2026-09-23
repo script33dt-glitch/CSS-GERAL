@@ -1,0 +1,136 @@
+/* =========================================================
+   SPICETIFY CUSTOM CSS - DARK PURPLE DISTORTION & LEAN PLAY
+   ========================================================= */
+
+/* 1. CORES GLOBAIS DA INTERFACE */
+:root {
+  --spice-main: transparent !important;
+  --spice-sidebar: rgba(10, 5, 15, 0.85) !important;
+  --spice-player: #05020a !important;
+  --spice-card: #12081f !important;
+  --spice-text: #ff0033 !important;
+  --spice-subtext: #cc0029 !important;
+  --spice-button: #ff0033 !important;
+  --spice-selected-row: #2a0836 !important;
+}
+
+/* 2. FUNDO ROXO ESCURO COM ANIMAÇÃO "TREMIDA" / DISTORÇÃO */
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  top: -10% !important;
+  left: -10% !important;
+  width: 120vw !important;
+  height: 120vh !important;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(45, 10, 65, 0.9), #05020a 80%),
+    repeating-linear-gradient(45deg, #1a0529 0px, #1a0529 10px, #0f0218 10px, #0f0218 20px) !important;
+  z-index: -2 !important;
+  animation: bgTremor 0.15s infinite alternate ease-in-out !important;
+}
+
+/* Efeito de vibração/tremor contínuo no fundo */
+@keyframes bgTremor {
+  0% { transform: translate(0, 0) scale(1); filter: hue-rotate(0deg); }
+  25% { transform: translate(-2px, 3px) scale(1.01); }
+  50% { transform: translate(3px, -1px) scale(0.99); filter: hue-rotate(5deg); }
+  75% { transform: translate(-1px, -3px) scale(1.01); }
+  100% { transform: translate(2px, 1px) scale(1); filter: hue-rotate(-5deg); }
+}
+
+/* Transparência das áreas para exibição do fundo */
+.Root__top-container,
+.main-view-container,
+.main-navBar-navBar,
+.Root__nav-bar,
+.main-yourLibraryX-entryPoints {
+  background-color: transparent !important;
+}
+
+/* 3. CONTRASTE EM VOLTA DAS MÚSICAS E CARDS (DESTAQUE DE LISTA) */
+.main-trackList-trackListRow {
+  background-color: rgba(15, 5, 25, 0.7) !important;
+  border: 1px solid rgba(255, 0, 51, 0.2) !important;
+  border-radius: 6px !important;
+  margin-bottom: 4px !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease !important;
+}
+
+/* Destaque ao passar o mouse por cima da música */
+.main-trackList-trackListRow:hover {
+  background-color: rgba(45, 10, 30, 0.9) !important;
+  border-color: #ff0033 !important;
+  box-shadow: 0 0 10px rgba(255, 0, 51, 0.3) !important;
+}
+
+/* Cards de álbuns/playlists com contraste visível */
+.main-card-card {
+  background-color: rgba(18, 8, 31, 0.85) !important;
+  border: 1px solid rgba(255, 0, 51, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8) !important;
+}
+
+.main-card-card:hover {
+  background-color: rgba(35, 10, 45, 0.95) !important;
+  border-color: #ff0033 !important;
+}
+
+/* 4. TEXTOS EM VERMELHO NEON */
+h1, h2, h3, p, span, a, 
+.main-type-bold, 
+.main-entityHeader-title, 
+.main-trackList-rowTitle, 
+.main-trackList-rowSubTitle {
+  color: #ff0033 !important;
+  text-shadow: 0 0 6px rgba(255, 0, 51, 0.7) !important;
+}
+
+/* Barra de progresso da música em roxo */
+.x-progressBar-fillColor {
+  background-color: #a800ff !important;
+  box-shadow: 0 0 10px #a800ff !important;
+}
+
+.x-progressBar-sliderHandle {
+  background-color: #d200ff !important;
+}
+
+/* 5. COPO NO BOTÃO PRINCIPAL DE PLAY/PAUSE (CLICÁVEL) */
+.main-nowPlayingBar-center button[data-testid="control-button-playpause"],
+.player-controls__buttons button[data-testid="control-button-playpause"] {
+  background: transparent !important;
+  border: none !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+/* Remove os vetores nativos de play/pause para exibir somente o copo */
+.main-nowPlayingBar-center button[data-testid="control-button-playpause"] svg,
+.player-controls__buttons button[data-testid="control-button-playpause"] svg {
+  display: none !important;
+}
+
+.main-nowPlayingBar-center button[data-testid="control-button-playpause"]::before,
+.player-controls__buttons button[data-testid="control-button-playpause"]::before {
+  content: "" !important;
+  width: 38px !important;
+  height: 44px !important;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><g><path d="M 10 15 C 10 10, 90 10, 90 15 L 82 105 C 80 115, 20 115, 18 105 Z" fill="%23FFFFFF" stroke="%23DDDDDD" stroke-width="2"/><path d="M 12 18 C 12 13, 88 13, 88 18 L 86 35 C 86 35, 14 35, 14 35 Z" fill="%23E6E6E6"/><ellipse cx="50" cy="18" rx="36" ry="6" fill="%23A800FF"/><path d="M 16 33 L 84 33" stroke="%23B0B0B0" stroke-width="3"/><path d="M 20 48 L 80 48" stroke="%23D0D0D0" stroke-width="2"/></g></svg>') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  transition: transform 0.15s ease, filter 0.15s ease !important;
+  pointer-events: none !important;
+}
+
+.main-nowPlayingBar-center button[data-testid="control-button-playpause"]:hover::before,
+.player-controls__buttons button[data-testid="control-button-playpause"]:hover::before {
+  transform: scale(1.15) rotate(-4deg) !important;
+  filter: drop-shadow(0 0 10px #ff0033) !important;
+}
