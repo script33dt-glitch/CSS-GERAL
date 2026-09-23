@@ -1,0 +1,97 @@
+/* =========================================================
+   GITHUB - VANTABLACK & PIXEL DINO LOGO (DEFINITIVO v2)
+   ========================================================= */
+
+/* 1. FUNDO VANTABLACK PAI E FILHOS */
+html,
+body,
+#start-of-content,
+[data-color-mode],
+.Header,
+header,
+.Layout-main,
+.Layout-sidebar,
+.discussion-timeline-actions,
+div[data-testid="results-list"] {
+  background-color: #000000 !important;
+  color: #c9d1d9 !important;
+}
+
+/* Painéis, bordas e caixas de código */
+.Box,
+.Box-header,
+.Box-body,
+.timeline-comment,
+.markdown-body {
+  background-color: #050505 !important;
+  border-color: #1a1a1a !important;
+}
+
+/* Texto muted escopado só dentro de painéis conhecidos -
+   evita pintar fundo preto em metadata solta pela UI (commits, labels etc) */
+.Box-header .f4.color-fg-muted,
+.Box-body .f4.color-fg-muted,
+.timeline-comment .f4.color-fg-muted {
+  background-color: #050505 !important;
+}
+
+/* 2. OCULTA O OCTOCAT E MOSTRA O DINO ESQUELETO PIXEL ART
+   O elemento real (conferido via DevTools) não tem aria-label - tem
+   aria-labelledby apontando pra outro nó, e a classe é
+   "styles-module__appHeaderHome__xxxxx" (hash que muda a cada deploy
+   do GitHub). O único identificador estável é a classe do SVG octicon
+   (convenção Primer, raramente muda), então seleciono o link via :has(). */
+.octicon-mark-github {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+a:has(> svg.octicon-mark-github) {
+  display: inline-block !important;
+  width: 38px !important;
+  height: 38px !important;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" shape-rendering="crispEdges"><rect width="24" height="24" fill="%2305070f"/><circle cx="5" cy="4" r="0.5" fill="%23ffffff"/><circle cx="19" cy="3" r="0.8" fill="%23ffffff"/><circle cx="21" cy="11" r="0.5" fill="%23ffffff"/><path d="M 12 5 L 20 5 L 20 10 L 19 10 L 19 12 L 13 12 L 13 10 L 10 10 L 10 7 L 12 7 Z" fill="%23e6e8eb"/><rect x="14" y="6" width="2" height="2" fill="%2305070f"/><path d="M 14 10 L 20 10" stroke="%2305070f" stroke-width="0.8"/><path d="M 9 10 L 12 10 L 12 18 L 10 18 L 10 22 L 8 22 L 8 16 L 9 16 Z" fill="%23d0d4d9"/><path d="M 12 12 L 11 13 M 12 15 L 11 16 M 12 17 L 11 18" stroke="%238a929a" stroke-width="0.8"/><rect x="6" y="14" width="2" height="2" fill="%23e6e8eb"/><rect x="4" y="17" width="2" height="2" fill="%23e6e8eb"/><rect x="2" y="20" width="2" height="2" fill="%23e6e8eb"/></svg>') !important;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 6px !important;
+  border: 1px solid #58a6ff !important;
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.4) !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease !important;
+}
+
+a:has(> svg.octicon-mark-github):hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.8) !important;
+}
+
+/* 3. FONTE MONOSPACE CONFORTÁVEL PARA CÓDIGO */
+code,
+pre,
+.blob-code-inner,
+.react-code-text,
+.cm-content {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  color: #e6edf3 !important;
+}
+
+/* 4. ESCRITA E LINKS SUAVES EM AZUL */
+p, span, h1, h2, h3, h4, label, td, th {
+  color: #c9d1d9 !important;
+}
+
+a, .btn-link {
+  color: #58a6ff !important;
+  text-shadow: none !important;
+}
+
+/* Campo de busca */
+header input,
+header [data-target*="search"] {
+  background-color: #101010 !important;
+  border: 1px solid #222222 !important;
+  color: #c9d1d9 !important;
+}
