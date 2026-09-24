@@ -9,21 +9,21 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- PrismJS para Syntax Highlighting -->
+  <!-- PrismJS para Highlighting do Código -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 
   <style>
     body { background-color: #0d1117; color: #c9d1d9; }
-    .glass { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .glass { background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 
-  <!-- Header -->
+  <!-- Header / Barra Superior -->
   <header class="glass sticky top-0 z-40 border-b border-gray-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-purple-500/20">
@@ -31,7 +31,7 @@
       </div>
       <div>
         <h1 class="text-xl font-bold text-white tracking-wide">CSS Vault</h1>
-        <p class="text-xs text-gray-400">Temas e estilos customizados prontos para uso</p>
+        <p class="text-xs text-gray-400">Estilos e temas customizados de fácil acesso</p>
       </div>
     </div>
 
@@ -53,25 +53,19 @@
       <button onclick="filterCategory('whatsapp')" id="tab-whatsapp" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
         <i class="fa-brands fa-whatsapp text-green-500 mr-2"></i>WhatsApp
       </button>
+      <button onclick="filterCategory('github')" id="tab-github" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
+        <i class="fa-brands fa-github text-white mr-2"></i>GitHub
+      </button>
       <button onclick="filterCategory('spotify')" id="tab-spotify" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
         <i class="fa-brands fa-spotify text-green-400 mr-2"></i>Spotify
-      </button>
-      <button onclick="filterCategory('discord')" id="tab-discord" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
-        <i class="fa-brands fa-discord text-indigo-400 mr-2"></i>Discord
       </button>
       <button onclick="filterCategory('youtube')" id="tab-youtube" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
         <i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube
       </button>
     </div>
 
-    <!-- Status de Carregamento -->
-    <div id="loading" class="text-center py-12">
-      <i class="fa-solid fa-spinner fa-spin text-3xl text-purple-500 mb-3"></i>
-      <p class="text-gray-400 text-sm">Carregando temas CSS...</p>
-    </div>
-
     <!-- Container do Grid de Cards -->
-    <div id="cssGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+    <div id="cssGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
     <!-- Caso sem resultados -->
     <div id="noResults" class="hidden text-center py-16">
@@ -80,7 +74,7 @@
     </div>
   </main>
 
-  <!-- Modal Visualizador de Código -->
+  <!-- Modal para Visualização de Código -->
   <div id="codeModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="glass w-full max-w-3xl rounded-2xl overflow-hidden flex flex-col max-h-[85vh] shadow-2xl border border-gray-700">
       <div class="px-6 py-4 border-b border-gray-800 flex items-center justify-between bg-gray-900/50">
@@ -104,37 +98,46 @@
   </div>
 
   <script>
-    let cssItems = [];
+    // LISTA DOS SEUS ESTILOS CSS
+    // Nota: Se a pasta no seu GitHub for "whatsAPP" com letras maiúsculas, ajuste no campo "file" abaixo.
+    const cssItems = [
+      {
+        title: "Tema WhatsApp Web",
+        category: "whatsapp",
+        description: "Estilo customizado para a interface do WhatsApp Web.",
+        file: "whatsAPP/style.css" 
+      },
+      {
+        title: "Tema GitHub",
+        category: "github",
+        description: "Estilo customizado para a interface do GitHub.",
+        file: "github/style.css"
+      },
+      {
+        title: "Tema Spotify Web",
+        category: "spotify",
+        description: "Estilo customizado para o player do Spotify Web.",
+        file: "spotify/style.css"
+      },
+      {
+        title: "Tema YouTube",
+        category: "youtube",
+        description: "Estilo customizado para o player e interface do YouTube.",
+        file: "youtube/style.css"
+      }
+    ];
+
     let currentCategory = 'all';
 
-    // Ícones e cores das plataformas
+    // Ícones e cores das marcas
     const platformMeta = {
       whatsapp: { icon: 'fa-brands fa-whatsapp', color: 'text-green-500' },
+      github:   { icon: 'fa-brands fa-github',   color: 'text-white' },
       spotify:  { icon: 'fa-brands fa-spotify',  color: 'text-green-400' },
-      discord:  { icon: 'fa-brands fa-discord',  color: 'text-indigo-400' },
       youtube:  { icon: 'fa-brands fa-youtube',  color: 'text-red-500' }
     };
 
-    // Carregar lista de CSS pelo manifest.json
-    async function loadCSSList() {
-      const loading = document.getElementById('loading');
-      const grid = document.getElementById('cssGrid');
-
-      try {
-        const response = await fetch('./manifest.json');
-        if (!response.ok) throw new Error("Erro ao ler manifest.json");
-        
-        cssItems = await response.json();
-        loading.classList.add('hidden');
-        grid.classList.remove('hidden');
-        renderCards();
-      } catch (err) {
-        console.error(err);
-        loading.innerHTML = `<p class="text-red-400 text-sm">Erro ao carregar os arquivos. Certifique-se de que o arquivo <b>manifest.json</b> está presente no seu repositório.</p>`;
-      }
-    }
-
-    // Renderizar os cards
+    // Renderizar os cards na tela
     function renderCards() {
       const grid = document.getElementById('cssGrid');
       const noResults = document.getElementById('noResults');
@@ -157,6 +160,8 @@
 
       filtered.forEach(item => {
         const meta = platformMeta[item.category] || { icon: 'fa-solid fa-file-code', color: 'text-purple-400' };
+        
+        // Gera o link direto do arquivo CSS no seu domínio da Vercel
         const fullCssUrl = window.location.origin + '/' + item.file;
 
         const card = document.createElement('div');
@@ -187,7 +192,7 @@
       });
     }
 
-    // Filtros de Abas
+    // Filtrar por Abas
     function filterCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -202,7 +207,7 @@
       renderCards();
     }
 
-    // Busca
+    // Evento de Busca
     document.getElementById('searchInput').addEventListener('input', renderCards);
 
     // Modal de Código
@@ -214,11 +219,12 @@
 
       try {
         const res = await fetch('./' + filePath);
+        if(!res.ok) throw new Error("Erro ao carregar");
         const code = await res.text();
         codeElem.textContent = code;
         Prism.highlightElement(codeElem);
       } catch (e) {
-        codeElem.textContent = "Erro ao carregar o código CSS.";
+        codeElem.textContent = "Não foi possível carregar este arquivo CSS. Verifique se o nome da pasta no GitHub está escrito com letras maiúsculas/minúsculas iguais ao caminho do arquivo.";
       }
     }
 
@@ -229,7 +235,7 @@
     function copyModalCode() {
       const code = document.getElementById('modalCode').textContent;
       navigator.clipboard.writeText(code);
-      alert("Código CSS copiado!");
+      alert("Código CSS copiado para a área de transferência!");
     }
 
     function copyToClipboard(text, btn) {
@@ -239,8 +245,8 @@
       setTimeout(() => { btn.innerHTML = originalText; }, 2000);
     }
 
-    // Inicializar
-    loadCSSList();
+    // Carregar os cards assim que a página abrir
+    renderCards();
   </script>
 </body>
 </html>
