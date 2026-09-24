@@ -1,0 +1,86 @@
+/* =========================================================
+   WHATSAPP WEB - TEMA NUVENS, VERDE NEON & DOUBLE CUP
+   ========================================================= */
+
+/* 1. FUNDO DA ÁREA DE CONVERSA COM NUVENS PEQUENAS (SEM TREMER) */
+div[data-asset-chat-background="true"],
+#main,
+#main > div,
+.x1n2onr6.x1vjfegm {
+  background-color: #05020a !important;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%2305020a"/><g stroke="%23ff007f" stroke-width="2" fill="%231a0826" opacity="0.85"><path d="M 10 40 C 30 20, 70 20, 80 40 C 90 25, 130 25, 140 40 C 150 30, 180 30, 190 40 C 200 50, 200 70, 180 80 C 160 90, 120 90, 100 80 C 80 90, 30 90, 10 70 Z"/><path d="M 30 140 C 50 120, 90 120, 100 140 C 110 125, 150 125, 160 140 C 170 130, 195 130, 200 140 C 205 150, 200 170, 180 180 C 160 190, 120 190, 100 180 C 80 190, 40 190, 30 170 Z"/></g></svg>') !important;
+  background-size: 180px 180px !important;
+  background-repeat: repeat !important;
+  animation: none !important; /* Tremoço desativado */
+}
+
+/* Transparência dos painéis centrais e cabeçalho */
+#main > span,
+#main header {
+  background-color: rgba(10, 2, 20, 0.9) !important;
+  border-bottom: 1px solid rgba(0, 255, 102, 0.4) !important;
+}
+
+/* 2. PAINEL LATERAL (LISTA DE MENSAGENS) */
+#side, [role="region"] {
+  background-color: rgba(8, 2, 14, 0.95) !important;
+  border-right: 1px solid rgba(0, 255, 102, 0.3) !important;
+}
+
+/* 3. SUAS MENSAGENS (ENVIADAS) - ROXO NEON */
+div[class*="message-out"] > div,
+div[data-id*="true_"] > div {
+  background-color: rgba(30, 5, 45, 0.9) !important;
+  border: 1.5px solid #a800ff !important;
+  box-shadow: 0 0 12px rgba(168, 0, 255, 0.6) !important;
+  border-radius: 12px !important;
+}
+
+/* 4. MENSAGENS RECEBIDAS - AZUL NEON */
+div[class*="message-in"] > div,
+div[data-id*="false_"] > div {
+  background-color: rgba(5, 15, 35, 0.9) !important;
+  border: 1.5px solid #00dfff !important;
+  box-shadow: 0 0 12px rgba(0, 223, 255, 0.6) !important;
+  border-radius: 12px !important;
+}
+
+/* 5. ESCRITA GERAL EM VERDE NEON */
+span, 
+p, 
+h1, 
+h2, 
+h3, 
+div[contenteditable="true"],
+[dir="ltr"],
+[dir="rtl"] {
+  color: #00ff66 !important;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.8) !important;
+}
+
+/* Horários das mensagens e status */
+[data-pre-plain-text], 
+time, 
+span[dir="auto"] {
+  color: #33ff88 !important;
+}
+
+/* 6. BARRA DE DIGITAÇÃO COM COPO EM SVG */
+footer {
+  background-color: rgba(10, 2, 20, 0.95) !important;
+  border-top: 1px solid rgba(0, 255, 102, 0.4) !important;
+}
+
+footer > div:first-child::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 32px !important;
+  height: 38px !important;
+  margin-left: 10px !important;
+  margin-right: 5px !important;
+  align-self: center !important;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><g><path d="M 10 15 C 10 10, 90 10, 90 15 L 82 105 C 80 115, 20 115, 18 105 Z" fill="%23FFFFFF" stroke="%23DDDDDD" stroke-width="2"/><path d="M 12 18 C 12 13, 88 13, 88 18 L 86 35 C 86 35, 14 35, 14 35 Z" fill="%23E6E6E6"/><ellipse cx="50" cy="18" rx="36" ry="6" fill="%23A800FF"/><path d="M 16 33 L 84 33" stroke="%23B0B0B0" stroke-width="3"/><path d="M 20 48 L 80 48" stroke="%23D0D0D0" stroke-width="2"/></g></svg>') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  filter: drop-shadow(0 0 8px #00ff66) !important;
+}
