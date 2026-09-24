@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom CSS Hub - Temas & Customizações</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        discord: '#5865F2',
+                        spotify: '#1DB954',
+                        whatsapp: '#25D366',
+                        youtube: '#FF0000',
+                        darkBg: '#0b0f19',
+                        darkCard: '#151c2c',
+                        darkBorder: '#232d42'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js for CSS Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background: rgba(21, 28, 44, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .theme-glow-discord:hover { box-shadow: 0 0 25px -5px rgba(88, 101, 242, 0.3); }
+        .theme-glow-spotify:hover { box-shadow: 0 0 25px -5px rgba(29, 185, 84, 0.3); }
+        .theme-glow-whatsapp:hover { box-shadow: 0 0 25px -5px rgba(37, 211, 102, 0.3); }
+        .theme-glow-youtube:hover { box-shadow: 0 0 25px -5px rgba(255, 0, 0, 0.3); }
+        .theme-glow-custom:hover { box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.3); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232d42;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                        <i class="fa-solid fa-code text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                            CSS<span class="text-purple-500">Hub</span>
+                        </span>
+                        <span class="hidden sm:inline-block text-xs bg-purple-500/10 text-purple-400 font-medium px-2 py-0.5 rounded-full border border-purple-500/20 ml-2">v1.0</span>
+                    </div>
+                </div>
+
+                <!-- Badges / External Links -->
+                <div class="flex items-center space-x-3">
+                    <a id="githubRepoBtn" href="https://github me" target="_blank" class="flex items-center space-x-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 border border-slate-700/60">
+                        <i class="fa-brands fa-github text-lg"></i>
+                        <span class="hidden md:inline">GitHub</span>
+                    </a>
+                    <a href="https://vercel.com" target="_blank" class="flex items-center space-x-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 border border-slate-700/60">
+                        <i class="fa-solid fa-triangle-circle-box text-xs"></i>
+                        <span class="hidden md:inline">Deploy no Vercel</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <!-- Background Gradient Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Coleção de Estilos Personalizados</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                Transforme suas plataformas favoritas com <span class="bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">CSS Customizado</span>
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 font-normal">
+                Temas elegantes e otimizados hospedados diretamente no GitHub. Pronto para instalar e usar com Stylus, UserCSS ou extensão similar.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-500"></i>
+                </div>
+                <input type="text" id="searchInput" placeholder="Pesquisar por tema, estilo ou plataforma..." class="w-full pl-11 pr-4 py-3.5 bg-slate-900/90 border border-slate-700/80 rounded-2xl text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all text-sm sm:text-base shadow-xl">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 flex-grow">
+        
+        <!-- Category Filter Tabs -->
+        <div class="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 pt-2 gap-2 border-b border-slate-800 mb-10 no-scrollbar">
+            <button onclick="filterCategory('all')" data-category="all" class="tab-btn active px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-purple-600 text-white shadow-lg shadow-purple-600/20">
+                <i class="fa-solid fa-layer-group mr-2"></i>Todos
+            </button>
+            <button onclick="filterCategory('whatsapp')" data-category="whatsapp" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800">
+                <i class="fa-brands fa-whatsapp text-emerald-500 mr-2"></i>WhatsApp
+            </button>
+            <button onclick="filterCategory('spotify')" data-category="spotify" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800">
+                <i class="fa-brands fa-spotify text-green-500 mr-2"></i>Spotify
+            </button>
+            <button onclick="filterCategory('discord')" data-category="discord" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800">
+                <i class="fa-brands fa-discord text-indigo-400 mr-2"></i>Discord
+            </button>
+            <button onclick="filterCategory('youtube')" data-category="youtube" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800">
+                <i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube
+            </button>
+            <button onclick="filterCategory('other')" data-category="other" class="tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800">
+                <i class="fa-solid fa-cubes text-purple-400 mr-2"></i>Outros
+            </button>
+        </div>
+
+        <!-- Theme Showcase Grid -->
+        <div id="themesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards will be populated dynamically via JavaScript -->
+        </div>
+
+        <!-- Empty State (Hidden by default) -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <div class="w-16 h-16 bg-slate-800/80 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-500 text-2xl">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-300">Nenhum tema encontrado</h3>
+            <p class="text-sm text-slate-500 mt-1">Tente pesquisar com outro termo ou selecione uma categoria diferente.</p>
+        </div>
+
+        <!-- Installation Guide Section -->
+        <section class="mt-20 pt-12 border-t border-slate-800/80">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold text-white mb-2">Como Usar os Temas?</h2>
+                <p class="text-slate-400 text-sm max-w-lg mx-auto">Instale seus estilos customizados em poucos passos simples usando extensões de navegador.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Step 1 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 relative">
+                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center mb-4 text-sm border border-purple-500/30">1</div>
+                    <h3 class="font-bold text-white mb-2">Instale o Stylus</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Baixe e instale a extensão <strong>Stylus</strong> (ou UserCSS) no seu navegador (Chrome, Firefox, Edge, Brave).
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 relative">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 font-bold flex items-center justify-center mb-4 text-sm border border-indigo-500/30">2</div>
+                    <h3 class="font-bold text-white mb-2">Copie o Código ou Link RAW</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Escolha um tema acima e clique em <strong>Ver Código</strong> para copiar a estrutura CSS ou copie a URL direta RAW.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-6 rounded-2xl border border-slate-800 relative">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 font-bold flex items-center justify-center mb-4 text-sm border border-cyan-500/30">3</div>
+                    <h3 class="font-bold text-white mb-2">Aplique e Aproveite</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Crie um novo estilo no Stylus, cole o CSS e salve. A página correspondente atualizará o visual automaticamente!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-sm">
+            <div class="flex items-center space-x-2">
+                <span>Hub de CSS Customizados Hospedados no GitHub</span>
+            </div>
+            <div class="flex items-center space-x-6 text-xs">
+                <a href="https://github.com" target="_blank" class="hover:text-slate-300 transition-colors">GitHub Repos</a>
+                <a href="https://vercel.com" target="_blank" class="hover:text-slate-300 transition-colors">Vercel Hosting</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Code Viewer Modal -->
+    <div id="codeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card w-full max-w-4xl rounded-2xl border border-slate-700/80 overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+                <div class="flex items-center space-x-3">
+                    <div id="modalIcon" class="text-xl"></div>
+                    <div>
+                        <h3 id="modalTitle" class="font-bold text-white text-base">Nome do Tema</h3>
+                        <p id="modalCategory" class="text-xs text-slate-400">Categoria</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Code area) -->
+            <div class="p-6 overflow-y-auto flex-grow bg-[#1d1f21] relative">
+                <pre class="m-0"><code id="modalCode" class="language-css text-xs sm:text-sm"></code></pre>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-slate-800 bg-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="flex items-center space-x-2 w-full sm:w-auto">
+                    <a id="modalGithubRaw" href="#" target="_blank" class="w-full sm:w-auto px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 transition-all border border-slate-700">
+                        <i class="fa-brands fa-github"></i>
+                        <span>Abrir RAW no GitHub</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-2 w-full sm:w-auto">
+                    <button id="copyCodeBtn" onclick="copyModalCode()" class="w-full sm:w-auto px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 transition-all shadow-lg shadow-purple-600/20">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copyCodeBtnText">Copiar Código CSS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prism JS for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+
+    <script>
+        // CONFIGURAÇÃO DOS SEUS TEMAS DO GITHUB
+        // Basta substituir ou adicionar os links das suas URLs RAW do GitHub aqui!
+        const GITHUB_USER = "seu-usuario"; // Ex: "seu-usuario"
+        const GITHUB_REPO = "seus-css";    // Ex: "meus-temas-css"
+        const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main`;
+
+        const themesData = [
+            {
+                id: 'whatsapp-dark-glass',
+                title: 'WhatsApp Web Glassmorphism',
+                category: 'whatsapp',
+                version: 'v2.1',
+                description: 'Interface translúcida em modo escuro com gradientes suaves e desfoque em vidro para o WhatsApp Web.',
+                iconClass: 'fa-brands fa-whatsapp text-emerald-400',
+                glowClass: 'theme-glow-whatsapp',
+                rawUrl: `${RAW_BASE}/whatsapp/glassmorphism.css`,
+                previewBg: 'from-emerald-950/40 via-slate-900 to-slate-900',
+                badgeBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+                sampleCode: `/* WhatsApp Web Glassmorphism Theme */
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%) !important;
+}
+
+#app .app-wrapper-web ._a72d {
+    background: rgba(15, 23, 42, 0.75) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Bolhas de mensagem personalizadas */
+.message-out {
+    background-color: rgba(16, 185, 129, 0.25) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 12px 12px 0 12px !important;
+}`
+            },
+            {
+                id: 'spotify-neon-purple',
+                title: 'Spotify Cyber Purple',
+                category: 'spotify',
+                version: 'v1.4',
+                description: 'Substitui o verde padrão do Spotify Web por tons Roxo Neon, barras de progresso iluminadas e cantos arredondados.',
+                iconClass: 'fa-brands fa-spotify text-green-400',
+                glowClass: 'theme-glow-spotify',
+                rawUrl: `${RAW_BASE}/spotify/cyber-purple.css`,
+                previewBg: 'from-green-950/40 via-purple-950/30 to-slate-900',
+                badgeBg: 'bg-green-500/10 text-green-400 border-green-500/20',
+                sampleCode: `/* Spotify Cyber Purple */
+:root {
+    --accent-color: #a855f7 !important;
+    --accent-glow: 0 0 15px rgba(168, 85, 247, 0.6) !important;
+}
+
+.Root__now-playing-bar {
+    background-color: #0b0f19 !important;
+    border-top: 1px solid rgba(168, 85, 247, 0.2) !important;
+}
+
+.playback-bar .progress-bar__fg {
+    background-color: var(--accent-color) !important;
+    box-shadow: var(--accent-glow) !important;
+}`
+            },
+            {
+                id: 'discord-oled-dark',
+                title: 'Discord Midnight OLED',
+                category: 'discord',
+                version: 'v3.0',
+                description: 'Modo escuro profundo de alto contraste perfeito para telas AMOLED e leituras noturnas prolongadas no Discord.',
+                iconClass: 'fa-brands fa-discord text-indigo-400',
+                glowClass: 'theme-glow-discord',
+                rawUrl: `${RAW_BASE}/discord/midnight-oled.css`,
+                previewBg: 'from-indigo-950/40 via-slate-900 to-slate-900',
+                badgeBg: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+                sampleCode: `/* Discord Midnight OLED Theme */
+.theme-dark {
+    --background-primary: #000000 !important;
+    --background-secondary: #050505 !important;
+    --background-secondary-alt: #0a0a0a !important;
+    --background-tertiary: #000000 !important;
+    --channeltextarea-background: #111111 !important;
+}
+
+.container-1eFtBq {
+    background-color: #000000 !important;
+}`
+            },
+            {
+                id: 'youtube-cinema-mode',
+                title: 'YouTube Ultra Cinema & Clean',
+                category: 'youtube',
+                version: 'v1.8',
+                description: 'Remove poluição visual, oculta recomendações desnecessárias e foca no player de vídeo com iluminação ambiente.',
+                iconClass: 'fa-brands fa-youtube text-red-500',
+                glowClass: 'theme-glow-youtube',
+                rawUrl: `${RAW_BASE}/youtube/ultra-cinema.css`,
+                previewBg: 'from-red-950/40 via-slate-900 to-slate-900',
+                badgeBg: 'bg-red-500/10 text-red-400 border-red-500/20',
+                sampleCode: `/* YouTube Ultra Cinema Theme */
+ytd-watch-flexy[flexy] #secondary.ytd-watch-flexy {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+ytd-watch-flexy[flexy] #secondary.ytd-watch-flexy:hover {
+    opacity: 1;
+}
+
+#masthead-container {
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(12px) !important;
+}`
+            },
+            {
+                id: 'custom-scrollbars',
+                title: 'Universal Neon Scrollbars',
+                category: 'other',
+                version: 'v1.0',
+                description: 'Substitui as barras de rolagem padrão do navegador por um design futurista com efeito de brilho e cantos suaves.',
+                iconClass: 'fa-solid fa-bars-staggered text-purple-400',
+                glowClass: 'theme-glow-custom',
+                rawUrl: `${RAW_BASE}/other/neon-scrollbars.css`,
+                previewBg: 'from-purple-950/40 via-slate-900 to-slate-900',
+                badgeBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+                sampleCode: `/* Universal Neon Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8b5cf6, #6366f1);
+    border-radius: 20px;
+    border: 2px solid #0b0f19;
+}`
+            }
+        ];
+
+        let activeCategory = 'all';
+        let activeModalTheme = null;
+
+        // Render Themes
+        function renderThemes(data) {
+            const grid = document.getElementById('themesGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            grid.innerHTML = '';
+
+            if (data.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            data.forEach(theme => {
+                const card = document.createElement('div');
+                card.className = `glass-card rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 ${theme.glowClass} group border border-slate-800`;
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Card Header Mock Visual -->
+                        <div class="h-28 w-full bg-gradient-to-r ${theme.previewBg} p-5 relative flex items-start justify-between border-b border-slate-800/80">
+                            <div class="w-12 h-12 rounded-2xl bg-slate-900/90 border border-slate-700/60 flex items-center justify-center text-2xl shadow-xl">
+                                <i class="${theme.iconClass}"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full border ${theme.badgeBg}">
+                                ${theme.version}
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6">
+                            <div class="text-xs font-medium uppercase tracking-wider text-slate-400 mb-1">
+                                ${theme.category}
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                                ${theme.title}
+                            </h3>
+                            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-4">
+                                ${theme.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="px-6 pb-6 pt-2 flex items-center gap-2">
+                        <button onclick="openModal('${theme.id}')" class="flex-1 py-2.5 px-3 bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/30 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Ver Código</span>
+                        </button>
+                        <button onclick="copyDirectRaw('${theme.rawUrl}', this)" title="Copiar URL RAW para o Stylus" class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-medium border border-slate-700 transition-all duration-200 flex items-center justify-center">
+                            <i class="fa-solid fa-link"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Categories
+        function filterCategory(cat) {
+            activeCategory = cat;
+            
+            // Toggle active state on buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = 'tab-btn active px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-purple-600 text-white shadow-lg shadow-purple-600/20';
+                } else {
+                    btn.className = 'tab-btn px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 whitespace-nowrap bg-slate-800/60 text-slate-400 hover:text-white hover:bg-slate-800';
+                }
+            });
+
+            filterData();
+        }
+
+        // Filter logic combined with search
+        function filterData() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            const filtered = themesData.filter(item => {
+                const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+                const matchesQuery = item.title.toLowerCase().includes(query) || 
+                                     item.description.toLowerCase().includes(query) ||
+                                     item.category.toLowerCase().includes(query);
+                return matchesCategory && matchesQuery;
+            });
+
+            renderThemes(filtered);
+        }
+
+        // Copy Direct RAW URL
+        function copyDirectRaw(url, btnElement) {
+            navigator.clipboard.writeText(url).then(() => {
+                const originalIcon = btnElement.innerHTML;
+                btnElement.innerHTML = `<i class="fa-solid fa-check text-green-400"></i>`;
+                btnElement.classList.add('border-green-500/50');
+
+                setTimeout(() => {
+                    btnElement.innerHTML = originalIcon;
+                    btnElement.classList.remove('border-green-500/50');
+                }, 2000);
+            });
+        }
+
+        // Modal Functions
+        function openModal(themeId) {
+            const theme = themesData.find(t => t.id === themeId);
+            if (!theme) return;
+
+            activeModalTheme = theme;
+
+            document.getElementById('modalTitle').textContent = theme.title;
+            document.getElementById('modalCategory').textContent = `Plataforma: ${theme.category.toUpperCase()} • ${theme.version}`;
+            document.getElementById('modalIcon').innerHTML = `<i class="${theme.iconClass}"></i>`;
+            document.getElementById('modalGithubRaw').href = theme.rawUrl;
+
+            const codeElement = document.getElementById('modalCode');
+            codeElement.textContent = theme.sampleCode;
+            
+            // Re-highlight code with Prism
+            Prism.highlightElement(codeElement);
+
+            const modal = document.getElementById('codeModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card').classList.remove('scale-95');
+            modal.querySelector('.glass-card').classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('codeModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-card').classList.remove('scale-100');
+            modal.querySelector('.glass-card').classList.add('scale-95');
+        }
+
+        function copyModalCode() {
+            if (!activeModalTheme) return;
+            
+            navigator.clipboard.writeText(activeModalTheme.sampleCode).then(() => {
+                const btnText = document.getElementById('copyCodeBtnText');
+                const btn = document.getElementById('copyCodeBtn');
+
+                btnText.textContent = 'Copiado!';
+                btn.classList.remove('bg-purple-600', 'hover:bg-purple-500');
+                btn.classList.add('bg-green-600', 'hover:bg-green-500');
+
+                setTimeout(() => {
+                    btnText.textContent = 'Copiar Código CSS';
+                    btn.classList.remove('bg-green-600', 'hover:bg-green-500');
+                    btn.classList.add('bg-purple-600', 'hover:bg-purple-500');
+                }, 2000);
+            });
+        }
+
+        // Initialize Events
+        document.addEventListener('DOMContentLoaded', () => {
+            renderThemes(themesData);
+
+            document.getElementById('searchInput').addEventListener('input', filterData);
+
+            // Close modal on background click
+            document.getElementById('codeModal').addEventListener('click', (e) => {
+                if (e.target.id === 'codeModal') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
