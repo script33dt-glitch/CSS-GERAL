@@ -98,37 +98,36 @@
   </div>
 
   <script>
-    // PREENCHA COM SEU USUÁRIO E SEU REPOSITÓRIO DO GITHUB
-    const GITHUB_USER = "seu-usuario";
-    const GITHUB_REPO = "seu-repositorio";
-    const GITHUB_BRANCH = "main"; // ou "master" dependendo do seu repositorio
+    // Dados reais do repositório
+    const GITHUB_USER = "script33dt-glitch";
+    const GITHUB_REPO = "CSS-GERAL";
+    const GITHUB_BRANCH = "main";
 
-    // Lista dos arquivos
+    // Lista dos arquivos (paths conferidos no repositório - note os espaços nos nomes)
     const cssItems = [
       {
         title: "Tema WhatsApp Web",
         category: "whatsapp",
         description: "Estilo customizado para a interface do WhatsApp Web.",
-        path: "WhatsAPP/style.css" 
+        path: "style.css WhatsAPP"
       },
       {
         title: "Tema GitHub",
         category: "github",
         description: "Estilo customizado para a interface do GitHub.",
-        path: "github/style.css"
+        path: "style.css github"
       },
       {
         title: "Tema Spotify Web",
         category: "spotify",
         description: "Estilo customizado para o player do Spotify Web.",
-        file: "spotify/style.css",
-        path: "spotify/style.css"
+        path: "style.css spotify"
       },
       {
         title: "Tema YouTube",
         category: "youtube",
         description: "Estilo customizado para o player e interface do YouTube.",
-        path: "youtube/style.css"
+        path: "style.css youtube"
       }
     ];
 
@@ -140,6 +139,12 @@
       spotify:  { icon: 'fa-brands fa-spotify',  color: 'text-green-400' },
       youtube:  { icon: 'fa-brands fa-youtube',  color: 'text-red-500' }
     };
+
+    // Monta a URL raw codificando cada segmento do path (necessário por causa dos espaços nos nomes de arquivo)
+    function buildRawUrl(path) {
+      const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+      return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${encodedPath}`;
+    }
 
     function renderCards() {
       const grid = document.getElementById('cssGrid');
@@ -163,9 +168,7 @@
 
       filtered.forEach(item => {
         const meta = platformMeta[item.category] || { icon: 'fa-solid fa-file-code', color: 'text-purple-400' };
-        
-        // Link direto Raw do GitHub
-        const rawGithubUrl = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${item.path}`;
+        const rawGithubUrl = buildRawUrl(item.path);
 
         const card = document.createElement('div');
         card.className = 'glass rounded-2xl p-5 flex flex-col justify-between hover:border-purple-500/50 transition duration-300 shadow-lg hover:shadow-purple-500/5 group';
@@ -224,7 +227,7 @@
         codeElem.textContent = code;
         Prism.highlightElement(codeElem);
       } catch (e) {
-        codeElem.textContent = "Não foi possível carregar o arquivo CSS.\n\nVerifique se o nome do seu usuário/repositório está correto na linha 145 do HTML e se a pasta no GitHub está exatamente como definida no caminho ('path').";
+        codeElem.textContent = "Não foi possível carregar o arquivo CSS.\n\nVerifique se o repositório continua público e se o nome do arquivo não mudou.";
       }
     }
 
