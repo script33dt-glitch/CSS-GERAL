@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- PrismJS para Highlighting do Código -->
+  <!-- PrismJS para Highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
@@ -98,38 +98,42 @@
   </div>
 
   <script>
-    // LISTA DOS SEUS ESTILOS CSS
-    // Nota: Se a pasta no seu GitHub for "whatsAPP" com letras maiúsculas, ajuste no campo "file" abaixo.
+    // PREENCHA COM SEU USUÁRIO E SEU REPOSITÓRIO DO GITHUB
+    const GITHUB_USER = "seu-usuario";
+    const GITHUB_REPO = "seu-repositorio";
+    const GITHUB_BRANCH = "main"; // ou "master" dependendo do seu repositorio
+
+    // Lista dos arquivos
     const cssItems = [
       {
         title: "Tema WhatsApp Web",
         category: "whatsapp",
         description: "Estilo customizado para a interface do WhatsApp Web.",
-        file: "whatsAPP/style.css" 
+        path: "WhatsAPP/style.css" 
       },
       {
         title: "Tema GitHub",
         category: "github",
         description: "Estilo customizado para a interface do GitHub.",
-        file: "github/style.css"
+        path: "github/style.css"
       },
       {
         title: "Tema Spotify Web",
         category: "spotify",
         description: "Estilo customizado para o player do Spotify Web.",
-        file: "spotify/style.css"
+        file: "spotify/style.css",
+        path: "spotify/style.css"
       },
       {
         title: "Tema YouTube",
         category: "youtube",
         description: "Estilo customizado para o player e interface do YouTube.",
-        file: "youtube/style.css"
+        path: "youtube/style.css"
       }
     ];
 
     let currentCategory = 'all';
 
-    // Ícones e cores das marcas
     const platformMeta = {
       whatsapp: { icon: 'fa-brands fa-whatsapp', color: 'text-green-500' },
       github:   { icon: 'fa-brands fa-github',   color: 'text-white' },
@@ -137,7 +141,6 @@
       youtube:  { icon: 'fa-brands fa-youtube',  color: 'text-red-500' }
     };
 
-    // Renderizar os cards na tela
     function renderCards() {
       const grid = document.getElementById('cssGrid');
       const noResults = document.getElementById('noResults');
@@ -161,8 +164,8 @@
       filtered.forEach(item => {
         const meta = platformMeta[item.category] || { icon: 'fa-solid fa-file-code', color: 'text-purple-400' };
         
-        // Gera o link direto do arquivo CSS no seu domínio da Vercel
-        const fullCssUrl = window.location.origin + '/' + item.file;
+        // Link direto Raw do GitHub
+        const rawGithubUrl = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${item.path}`;
 
         const card = document.createElement('div');
         card.className = 'glass rounded-2xl p-5 flex flex-col justify-between hover:border-purple-500/50 transition duration-300 shadow-lg hover:shadow-purple-500/5 group';
@@ -180,10 +183,10 @@
           </div>
 
           <div class="flex items-center gap-2 pt-4 border-t border-gray-800/80">
-            <button onclick="openModal('${item.title}', '${item.file}')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs py-2.5 px-3 rounded-xl font-medium transition flex items-center justify-center gap-2">
+            <button onclick="openModal('${item.title}', '${rawGithubUrl}')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs py-2.5 px-3 rounded-xl font-medium transition flex items-center justify-center gap-2">
               <i class="fa-regular fa-eye"></i> Ver Código
             </button>
-            <button onclick="copyToClipboard('${fullCssUrl}', this)" class="bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/30 text-xs py-2.5 px-3 rounded-xl font-medium transition flex items-center justify-center gap-2">
+            <button onclick="copyToClipboard('${rawGithubUrl}', this)" class="bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/30 text-xs py-2.5 px-3 rounded-xl font-medium transition flex items-center justify-center gap-2">
               <i class="fa-regular fa-copy"></i> Copiar Link
             </button>
           </div>
@@ -192,7 +195,6 @@
       });
     }
 
-    // Filtrar por Abas
     function filterCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -207,24 +209,22 @@
       renderCards();
     }
 
-    // Evento de Busca
     document.getElementById('searchInput').addEventListener('input', renderCards);
 
-    // Modal de Código
-    async function openModal(title, filePath) {
+    async function openModal(title, url) {
       document.getElementById('modalTitle').innerText = title;
       const codeElem = document.getElementById('modalCode');
-      codeElem.textContent = "Carregando...";
+      codeElem.textContent = "Carregando código...";
       document.getElementById('codeModal').classList.remove('hidden');
 
       try {
-        const res = await fetch('./' + filePath);
-        if(!res.ok) throw new Error("Erro ao carregar");
+        const res = await fetch(url);
+        if(!res.ok) throw new Error("Falha ao buscar");
         const code = await res.text();
         codeElem.textContent = code;
         Prism.highlightElement(codeElem);
       } catch (e) {
-        codeElem.textContent = "Não foi possível carregar este arquivo CSS. Verifique se o nome da pasta no GitHub está escrito com letras maiúsculas/minúsculas iguais ao caminho do arquivo.";
+        codeElem.textContent = "Não foi possível carregar o arquivo CSS.\n\nVerifique se o nome do seu usuário/repositório está correto na linha 145 do HTML e se a pasta no GitHub está exatamente como definida no caminho ('path').";
       }
     }
 
@@ -235,7 +235,7 @@
     function copyModalCode() {
       const code = document.getElementById('modalCode').textContent;
       navigator.clipboard.writeText(code);
-      alert("Código CSS copiado para a área de transferência!");
+      alert("Código CSS copiado!");
     }
 
     function copyToClipboard(text, btn) {
@@ -245,7 +245,6 @@
       setTimeout(() => { btn.innerHTML = originalText; }, 2000);
     }
 
-    // Carregar os cards assim que a página abrir
     renderCards();
   </script>
 </body>
