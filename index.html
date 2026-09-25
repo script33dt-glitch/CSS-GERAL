@@ -230,7 +230,7 @@
         const files = await res.json();
 
         cssItems = files
-          .filter(f => f.type === 'file' && /\.css$/i.test(f.name))
+          .filter(f => f.type === 'file' && /\.css/i.test(f.name))
           .map(f => {
             const category = detectCategory(f.name);
             return {
