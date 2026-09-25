@@ -108,22 +108,10 @@
 
   <main class="max-w-7xl mx-auto px-6 py-8 flex-1 w-full">
     
-    <!-- Filtro de Abas -->
+    <!-- Filtro de Abas (geradas automaticamente a partir dos arquivos do repositório) -->
     <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-800 pb-4" id="tabsContainer">
       <button onclick="filterCategory('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition bg-purple-600 text-white shadow-md">
         <i class="fa-solid fa-border-all mr-2"></i>Todos
-      </button>
-      <button onclick="filterCategory('whatsapp')" id="tab-whatsapp" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
-        <i class="fa-brands fa-whatsapp text-green-500 mr-2"></i>WhatsApp
-      </button>
-      <button onclick="filterCategory('github')" id="tab-github" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
-        <i class="fa-brands fa-github text-white mr-2"></i>GitHub
-      </button>
-      <button onclick="filterCategory('spotify')" id="tab-spotify" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
-        <i class="fa-brands fa-spotify text-green-400 mr-2"></i>Spotify
-      </button>
-      <button onclick="filterCategory('youtube')" id="tab-youtube" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition">
-        <i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube
       </button>
     </div>
 
@@ -172,47 +160,115 @@
     const GITHUB_REPO = "CSS-GERAL";
     const GITHUB_BRANCH = "main";
 
-    // Lista dos arquivos (paths conferidos no repositório - note os espaços nos nomes)
-    const cssItems = [
-      {
-        title: "Tema WhatsApp Web",
-        category: "whatsapp",
-        description: "Estilo customizado para a interface do WhatsApp Web.",
-        path: "style.css WhatsAPP"
-      },
-      {
-        title: "Tema GitHub",
-        category: "github",
-        description: "Estilo customizado para a interface do GitHub.",
-        path: "style.css github"
-      },
-      {
-        title: "Tema Spotify Web",
-        category: "spotify",
-        description: "Estilo customizado para o player do Spotify Web.",
-        path: "style.css spotify"
-      },
-      {
-        title: "Tema YouTube",
-        category: "youtube",
-        description: "Estilo customizado para o player e interface do YouTube.",
-        path: "style.css youtube"
-      }
-    ];
-
+    // Lista de estilos: preenchida automaticamente lendo o conteúdo do repositório
+    // (nada aqui precisa ser editado à mão — basta subir/atualizar arquivos no GitHub)
+    let cssItems = [];
     let currentCategory = 'all';
 
+    // Ícone/cor para categorias conhecidas. Categorias novas (detectadas pelo nome do
+    // arquivo) recebem um ícone genérico e uma cor tirada dessa paleta, em sequência.
     const platformMeta = {
-      whatsapp: { icon: 'fa-brands fa-whatsapp', color: 'text-green-500' },
-      github:   { icon: 'fa-brands fa-github',   color: 'text-white' },
-      spotify:  { icon: 'fa-brands fa-spotify',  color: 'text-green-400' },
-      youtube:  { icon: 'fa-brands fa-youtube',  color: 'text-red-500' }
+      whatsapp: { icon: 'fa-brands fa-whatsapp', color: 'text-green-500', label: 'WhatsApp' },
+      github:   { icon: 'fa-brands fa-github',   color: 'text-white',     label: 'GitHub' },
+      spotify:  { icon: 'fa-brands fa-spotify',  color: 'text-green-400', label: 'Spotify' },
+      youtube:  { icon: 'fa-brands fa-youtube',  color: 'text-red-500',   label: 'YouTube' }
     };
+    const fallbackColors = ['text-blue-400', 'text-pink-400', 'text-yellow-400', 'text-orange-400', 'text-cyan-400', 'text-indigo-400'];
+    let fallbackColorIndex = 0;
 
-    // Monta a URL raw codificando cada segmento do path (necessário por causa dos espaços nos nomes de arquivo)
+    function metaFor(category) {
+      if (platformMeta[category]) return platformMeta[category];
+      // Categoria nova: cria e memoriza um estilo pra ela na hora
+      const meta = {
+        icon: 'fa-solid fa-file-code',
+        color: fallbackColors[fallbackColorIndex % fallbackColors.length],
+        label: category.charAt(0).toUpperCase() + category.slice(1)
+      };
+      fallbackColorIndex++;
+      platformMeta[category] = meta;
+      return meta;
+    }
+
+    // Descobre a categoria pelo nome do arquivo. Se nenhuma palavra-chave bater,
+    // cai em "outros".
+    function detectCategory(filename) {
+      const lower = filename.toLowerCase();
+      const known = ['whatsapp', 'github', 'spotify', 'youtube', 'instagram', 'twitter', 'discord', 'telegram', 'netflix'];
+      for (const key of known) {
+        if (lower.includes(key)) return key;
+      }
+      return 'outros';
+    }
+
+    // Monta um título legível a partir do nome do arquivo
+    function titleFor(filename, category) {
+      let cleaned = filename.replace(/\.css$/i, '').replace(/^style\.css\s*/i, '').replace(/^style[\s._-]*/i, '').trim();
+      if (!cleaned || cleaned.toLowerCase() === category) {
+        cleaned = metaFor(category).label;
+      }
+      return 'Tema ' + cleaned;
+    }
+
+    // Monta a URL raw codificando cada segmento do path (necessário por causa de espaços nos nomes)
     function buildRawUrl(path) {
       const encodedPath = path.split('/').map(encodeURIComponent).join('/');
       return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${encodedPath}`;
+    }
+
+    // Busca a lista de arquivos .css direto do repositório via API do GitHub.
+    // Isso roda toda vez que a página carrega, então: arquivo novo = card novo
+    // automaticamente; arquivo com o mesmo nome editado = conteúdo atualizado
+    // automaticamente (o "Ver Código" sempre busca o conteúdo mais recente).
+    async function loadCssItemsFromGithub() {
+      const grid = document.getElementById('cssGrid');
+      grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-400"><i class="fa-solid fa-spinner fa-spin text-2xl mb-3"></i><p>Carregando estilos do repositório...</p></div>`;
+
+      try {
+        const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/?ref=${GITHUB_BRANCH}`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error('Falha ao listar repositório (status ' + res.status + ')');
+        const files = await res.json();
+
+        cssItems = files
+          .filter(f => f.type === 'file' && /\.css$/i.test(f.name))
+          .map(f => {
+            const category = detectCategory(f.name);
+            return {
+              title: titleFor(f.name, category),
+              category: category,
+              description: `Estilo customizado (${f.name}).`,
+              path: f.name
+            };
+          });
+
+        renderTabs();
+        renderCards();
+      } catch (e) {
+        grid.innerHTML = `<div class="col-span-full text-center py-16 text-gray-400">
+          <i class="fa-solid fa-triangle-exclamation text-2xl mb-3 text-yellow-500"></i>
+          <p>Não foi possível carregar a lista do repositório agora.</p>
+          <p class="text-xs mt-2">Isso pode acontecer se o limite de requisições da API do GitHub for atingido. Tente recarregar a página em alguns minutos.</p>
+        </div>`;
+      }
+    }
+
+    // Gera as abas de categoria a partir do que foi encontrado nos arquivos
+    function renderTabs() {
+      const container = document.getElementById('tabsContainer');
+      const categories = [...new Set(cssItems.map(i => i.category))];
+
+      // Remove abas antigas (menos "Todos") antes de recriar
+      container.querySelectorAll('.tab-btn:not(#tab-all)').forEach(btn => btn.remove());
+
+      categories.forEach(cat => {
+        const meta = metaFor(cat);
+        const btn = document.createElement('button');
+        btn.id = `tab-${cat}`;
+        btn.className = 'tab-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white transition';
+        btn.onclick = () => filterCategory(cat);
+        btn.innerHTML = `<i class="${meta.icon} ${meta.color} mr-2"></i>${meta.label}`;
+        container.appendChild(btn);
+      });
     }
 
     function renderCards() {
@@ -220,6 +276,7 @@
       const noResults = document.getElementById('noResults');
       const search = document.getElementById('searchInput').value.toLowerCase();
 
+      document.getElementById('itemCount').textContent = cssItems.length;
       grid.innerHTML = '';
 
       const filtered = cssItems.filter(item => {
@@ -236,7 +293,7 @@
       noResults.classList.add('hidden');
 
       filtered.forEach(item => {
-        const meta = platformMeta[item.category] || { icon: 'fa-solid fa-file-code', color: 'text-purple-400' };
+        const meta = metaFor(item.category);
         const rawGithubUrl = buildRawUrl(item.path);
 
         const card = document.createElement('div');
@@ -247,7 +304,7 @@
             <div class="flex items-center justify-between mb-3">
               <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-800 border border-gray-700 flex items-center gap-2">
                 <i class="${meta.icon} ${meta.color}"></i>
-                <span class="capitalize text-gray-300">${item.category}</span>
+                <span class="text-gray-300">${meta.label}</span>
               </span>
             </div>
             <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition mb-2">${item.title}</h3>
@@ -331,9 +388,8 @@
       setTheme(saved);
     }
 
-    document.getElementById('itemCount').textContent = cssItems.length;
     loadTheme();
-    renderCards();
+    loadCssItemsFromGithub();
   </script>
 </body>
 </html>
