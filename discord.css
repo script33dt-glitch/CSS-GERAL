@@ -1,0 +1,218 @@
+/* =========================================================
+   DISCORD WEB — MINECRAFT
+   APAGUE O CSS ANTIGO E COLE SOMENTE ESTE
+   ========================================================= */
+
+/* WALLPAPER */
+html,
+body,
+#app-mount {
+    min-height: 100vh !important;
+    background: transparent !important;
+}
+
+#app-mount::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15)
+        ),
+        url("https://i.pinimg.com/1200x/af/32/6e/af326eacce1f3bf746c0c744ce6779a1.jpg") !important;
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+/* COLOCA O DISCORD NA FRENTE DO WALLPAPER */
+#app-mount > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* REMOVE OS FUNDOS PRINCIPAIS */
+[class*="app_"],
+[class*="bg_"],
+[class*="layer_"],
+[class*="layers_"],
+[class*="base_"],
+[class*="content_"],
+[class*="page_"] {
+    background: transparent !important;
+}
+
+/* CHAT */
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="messagesWrapper_"] {
+    background: transparent !important;
+}
+
+/* FUNDO DO CHAT — LEVE ESCURECIMENTO */
+[class*="chatContent_"] [class*="scroller_"] {
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* LISTA DE SERVIDORES */
+[class*="guilds_"] {
+    background: rgba(2, 5, 12, 0.65) !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+/* LISTA DE CANAIS / DMS */
+[class*="sidebar_"] {
+    background: rgba(2, 5, 12, 0.65) !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+[class*="sidebar_"] [class*="scroller_"],
+[class*="sidebar_"] [class*="container_"] {
+    background: transparent !important;
+}
+
+/* LISTA DE MEMBROS */
+[class*="membersWrap_"],
+[class*="members_"] {
+    background: rgba(2, 5, 12, 0.55) !important;
+    backdrop-filter: blur(6px) !important;
+}
+
+/* TELA DE AMIGOS / SEM CHAT ABERTO */
+[class*="peopleColumn_"],
+[class*="peopleList_"],
+[class*="tabBody_"],
+[class*="nowPlayingColumn_"] {
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* CONFIGURAÇÕES */
+[class*="standardSidebarView_"],
+[class*="contentRegion_"],
+[class*="contentRegionScroller_"],
+[class*="contentColumn_"] {
+    background: transparent !important;
+}
+
+/* BARRA SUPERIOR */
+[class*="title_"],
+[class*="upperContainer_"] {
+    background: rgba(2, 5, 12, 0.55) !important;
+    backdrop-filter: blur(7px) !important;
+}
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+[class*="message_"] {
+    border-bottom: 1px solid rgba(145, 190, 255, 0.20) !important;
+
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease !important;
+}
+
+/* MOUSE SOBRE A MENSAGEM */
+[class*="message_"]:hover {
+    background: rgba(45, 90, 145, 0.18) !important;
+
+    border-bottom-color:
+        rgba(130, 190, 255, 0.60) !important;
+}
+
+/* NOMES */
+[class*="username_"] {
+    font-weight: 700 !important;
+}
+
+/* TEXTO */
+[class*="messageContent_"] {
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.95) !important;
+}
+
+/* MENÇÃO */
+[class*="mentioned_"] {
+    background:
+        rgba(70, 125, 190, 0.25) !important;
+
+    border-left:
+        3px solid rgba(130, 195, 255, 0.95) !important;
+}
+
+/* =========================================================
+   CAMPO DE DIGITAR
+   ========================================================= */
+
+[class*="channelTextArea_"] {
+    background: transparent !important;
+}
+
+[class*="scrollableContainer_"] {
+    background:
+        rgba(3, 8, 16, 0.78) !important;
+
+    backdrop-filter:
+        blur(10px) !important;
+
+    border:
+        1px solid rgba(120, 175, 235, 0.18) !important;
+
+    border-radius: 12px !important;
+}
+
+/* PAINEL DO PERFIL */
+[class*="panels_"] {
+    background:
+        rgba(2, 6, 13, 0.80) !important;
+
+    backdrop-filter:
+        blur(8px) !important;
+}
+
+/* POPUPS */
+[class*="menu_"],
+[class*="popout_"] {
+    background:
+        rgba(4, 8, 16, 0.94) !important;
+
+    backdrop-filter:
+        blur(12px) !important;
+}
+
+/* RESPOSTAS */
+[class*="repliedMessage_"] {
+    opacity: 0.85 !important;
+}
+
+/* DIVISOR DE DATA */
+[class*="divider_"] {
+    border-color:
+        rgba(130, 185, 245, 0.30) !important;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar-thumb {
+    background:
+        rgba(105, 155, 215, 0.40) !important;
+
+    border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+    background:
+        rgba(0, 0, 0, 0.10) !important;
+}
